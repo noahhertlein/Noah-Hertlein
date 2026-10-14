@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cardinal: #9d2235;
+  --color-cardinal-deep: #7c1a2a;
+  --color-paper: #f7eedd;
+  --color-card: #fffaf0;
+  --color-ink: #1d1517;
+  --color-ink-soft: #5b4d50;
+  --color-navy: #263759;
+  --color-butter: #f6d27a;
+  --color-sky: #bfd6ec;
+  --color-sage: #bdd2b4;
+  --color-blush: #f3c3c0;
+  --color-lilac: #d7cdee;
+  --color-wash: #f3dcd6;
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-panel: 22px;
+  --radius-card: 14px;
+  --radius-chip: 8px;
+
+  --shadow-hard: 3px 3px 0 0 var(--color-ink);
+  --shadow-hard-lg: 5px 5px 0 0 var(--color-ink);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-cardinal);
+  color: var(--color-card);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* The outlined "sticker" surfaces borrowed from kawe.ski: ink border plus a hard offset shadow. */
+  .panel {
+    background: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-hard-lg);
+  }
+
+  .card {
+    background: var(--color-card);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-hard);
+  }
+
+  /* Pressable things sink into their shadow, like a physical button. */
+  .press {
+    transition:
+      transform 120ms ease-out,
+      box-shadow 120ms ease-out;
+  }
+  .press:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+  }
+  .press:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.55rem 1rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 10px;
+    box-shadow: var(--shadow-hard);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.1;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.65rem;
+    border: 1.5px solid var(--color-ink);
+    border-radius: var(--radius-chip);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-variation-settings: "wdth" 92;
+  }
+}
+
+.tone-butter { background: var(--color-butter); }
+.tone-sky { background: var(--color-sky); }
+.tone-sage { background: var(--color-sage); }
+.tone-blush { background: var(--color-blush); }
+.tone-lilac { background: var(--color-lilac); }
+.tone-navy { background: var(--color-navy); color: var(--color-card); }
+.tone-cardinal { background: var(--color-cardinal); color: var(--color-card); }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
